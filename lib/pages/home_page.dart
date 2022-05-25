@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/config/assets.dart';
 import 'package:portfolio/providers/api_provider.dart';
 import 'package:portfolio/tabs/about_tab.dart';
 import 'package:portfolio/widgets/theme_inherited_widget.dart';
@@ -43,10 +42,9 @@ class _HomePageState extends State<HomePage> {
                       Icons.lightbulb,
                       size: 15,
                     )
-                  : Image.asset(
-                      Assets.moon,
-                      height: 20,
-                      width: 20,
+                  :  const Icon(
+                      Icons.lightbulb,
+                      size: 15,
                     ),
               onPressed: () => ThemeSwitcher.of(context)
                   .switchDarkMode(),

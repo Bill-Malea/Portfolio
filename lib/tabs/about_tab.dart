@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/config/assets.dart';
 import 'package:portfolio/config/constants.dart';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
 
-class AboutTab extends StatelessWidget {
+import 'package:portfolio/providers/projectsprovider.dart';
+import 'package:provider/provider.dart';
+
+class AboutTab extends StatefulWidget {
   const AboutTab({Key? key}) : super(key: key);
+
+  @override
+  State<AboutTab> createState() => _AboutTabState();
+}
+
+class _AboutTabState extends State<AboutTab> {
+  @override
+  void didChangeDependencies() {
+    Provider.of<Projectsprovider>(context).loadprojects();
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +31,7 @@ class AboutTab extends StatelessWidget {
             children: <Widget>[
               CircleAvatar(
                 radius: 100,
-                backgroundImage:
-                    Image.asset(Assets.avatar).image,
+                backgroundImage: Image.asset('assets/avatar.jpg').image,
               ),
               const SizedBox(
                 height: 20,
@@ -29,10 +41,19 @@ class AboutTab extends StatelessWidget {
                 textScaleFactor: 4,
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(
-                'Flutter.React Js. Node Js. Firebase. Aws   \nLikes Traveling.',
+                'Tech Stack',
+                style: Theme.of(context).textTheme.bodyText2,
+                textScaleFactor: 2,
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                'Flutter.React Js. Node Js. Firebase. Aws   \nLikes Traveling,Gaming.',
                 style: Theme.of(context).textTheme.caption,
                 textScaleFactor: 2,
                 textAlign: TextAlign.center,
@@ -43,73 +64,63 @@ class AboutTab extends StatelessWidget {
               TextButton.icon(
                 icon: const Icon(Icons.download),
                 label: const Text('Download CV'),
-                onPressed: () => html.window.open(
-                    Constants.PROFILE_TWITTER, 'BillMalea'),
+                onPressed: () =>
+                    html.window.open(Constants.PROFILE_TWITTER, 'BillMalea'),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment:
-                    CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
-                        child: Image.asset(Assets.github)),
+                        child: Image.asset('assets/github.png')),
                     label: const Text('Github'),
-                    onPressed: () => html.window.open(
-                        Constants.PROFILE_GITHUB,
-                        'BillMalea'),
+                    onPressed: () =>
+                        html.window.open(Constants.PROFILE_GITHUB, 'BillMalea'),
                   ),
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
-                        child: Image.asset(Assets.twitter)),
+                        child: Image.asset('assets/twitter.png')),
                     label: const Text('Twitter'),
-                    onPressed: () => html.window.open(
-                        Constants.PROFILE_TWITTER,
-                        'BillMalea'),
+                    onPressed: () => html.window
+                        .open(Constants.PROFILE_TWITTER, 'BillMalea'),
                   ),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment:
-                    CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
-                        child:
-                            Image.asset(Assets.instagram)),
+                        child: Image.asset('assets/instagram.png')),
                     label: const Text('Instagram'),
-                    onPressed: () => html.window.open(
-                        Constants.PROFILE_INSTAGRAM,
-                        'BillMalea'),
+                    onPressed: () => html.window
+                        .open(Constants.PROFILE_INSTAGRAM, 'BillMalea'),
                   ),
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
-                        child:
-                            Image.asset(Assets.facebook)),
+                        child: Image.asset('assets/facebook.png')),
                     label: const Text('Facebook'),
-                    onPressed: () => html.window.open(
-                        Constants.PROFILE_FACEBOOK,
-                        'BillMalea'),
+                    onPressed: () => html.window
+                        .open(Constants.PROFILE_FACEBOOK, 'BillMalea'),
                   ),
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
-                        child:
-                            Image.asset(Assets.linkedin)),
+                        child: Image.asset('assets/linkedin.png')),
                     label: const Text('Linkedin'),
-                    onPressed: () => html.window.open(
-                        Constants.PROFILE_LINKEDIN,
-                        'BillMalea'),
+                    onPressed: () => html.window
+                        .open(Constants.PROFILE_LINKEDIN, 'BillMalea'),
                   )
                 ],
               )
