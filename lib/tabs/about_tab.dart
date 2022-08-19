@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/config/constants.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
-
 import 'package:portfolio/providers/projectsprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,9 +15,9 @@ class _AboutTabState extends State<AboutTab> {
     Provider.of<Projectsprovider>(context).loadprojects();
     super.didChangeDependencies();
   }
-
   @override
   Widget build(BuildContext context) {
+    var _links = Provider.of<Projectsprovider>(context).links;
     return SingleChildScrollView(
       child: Center(
         child: Padding(
@@ -53,20 +49,32 @@ class _AboutTabState extends State<AboutTab> {
                 height: 15,
               ),
               Text(
-                'Flutter.React Js. Node Js. Firebase. Aws   \nLikes Traveling,Gaming.',
+                'Flutter.React Js. Node Js. Firebase.Aws ',
                 style: Theme.of(context).textTheme.caption,
                 textScaleFactor: 2,
                 textAlign: TextAlign.center,
               ),
+             //  'Likes Traveling,Gaming.'
               const SizedBox(
-                height: 40,
+                height: 20,
               ),
-              TextButton.icon(
-                icon: const Icon(Icons.download),
-                label: const Text('Download CV'),
-                onPressed: () =>
-                    html.window.open(Constants.PROFILE_TWITTER, 'BillMalea'),
+              ElevatedButton(
+            clipBehavior: Clip.antiAlias,
+            onPressed: () {
+              Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Cv']);
+            },
+            child: const Text(
+              'Download CV',
+              style: TextStyle(
+                fontSize: 14,
               ),
+            ),
+          ),
+ const SizedBox(
+                height: 20,
+              ),
+
+           
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,18 +84,20 @@ class _AboutTabState extends State<AboutTab> {
                         width: 20,
                         height: 20,
                         child: Image.asset('assets/github.png')),
-                    label: const Text('Github'),
-                    onPressed: () =>
-                        html.window.open(Constants.PROFILE_GITHUB, 'BillMalea'),
+                    label: const Text('Github'), onPressed: () { 
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Github']);
+                     },
+                    
                   ),
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
                         child: Image.asset('assets/twitter.png')),
-                    label: const Text('Twitter'),
-                    onPressed: () => html.window
-                        .open(Constants.PROFILE_TWITTER, 'BillMalea'),
+                    label: const Text('Twitter'), onPressed: () { 
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Twitter']);
+                     },
+                   
                   ),
                 ],
               ),
@@ -100,27 +110,30 @@ class _AboutTabState extends State<AboutTab> {
                         width: 20,
                         height: 20,
                         child: Image.asset('assets/instagram.png')),
-                    label: const Text('Instagram'),
-                    onPressed: () => html.window
-                        .open(Constants.PROFILE_INSTAGRAM, 'BillMalea'),
+                    label: const Text('Instagram'), onPressed: () { 
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Instagram']);
+                     },
+                   
                   ),
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
                         child: Image.asset('assets/facebook.png')),
-                    label: const Text('Facebook'),
-                    onPressed: () => html.window
-                        .open(Constants.PROFILE_FACEBOOK, 'BillMalea'),
+                    label: const Text('Facebook'), onPressed: () { 
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Facebook']);
+                     },
+                   
                   ),
                   TextButton.icon(
                     icon: SizedBox(
                         width: 20,
                         height: 20,
                         child: Image.asset('assets/linkedin.png')),
-                    label: const Text('Linkedin'),
-                    onPressed: () => html.window
-                        .open(Constants.PROFILE_LINKEDIN, 'BillMalea'),
+                    label: const Text('Linkedin'), onPressed: () { 
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Linkedin']);
+                     },
+                   
                   )
                 ],
               )

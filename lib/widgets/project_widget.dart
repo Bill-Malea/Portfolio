@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 import 'package:portfolio/models/project_model.dart';
 
 class ProjectWidget extends StatelessWidget {
@@ -47,6 +45,6 @@ class ProjectWidget extends StatelessWidget {
   }
 
   void onProjectClick() {
-    html.window.open(project.link, "Billmalea");
+  //  html.window.open(project.link, "Billmalea");
   }
 }

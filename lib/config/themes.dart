@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 darkTheme(context) {
   return ThemeData(
     fontFamily: 'GoogleSansRegular',
+    textTheme: const TextTheme(titleSmall: TextStyle(
+      fontSize: 11
+    )),
     primarySwatch: Colors.pink,
     primaryColor: Colors.black,
     disabledColor: Colors.grey,
-    cardColor: const Color(0xff1f2124),
+    cardColor: Colors.pink,
     canvasColor: Colors.black,
     brightness: Brightness.dark,
     buttonTheme: Theme.of(context).buttonTheme.copyWith(
@@ -20,13 +23,15 @@ darkTheme(context) {
 
 lightTheme(context) {
   return ThemeData(
-    fontFamily: 'GoogleSansRegular',
+    fontFamily: 'GoogleSansRegular',  textTheme: const TextTheme(titleSmall: TextStyle(
+      fontSize: 11
+    )),
     primarySwatch: Colors.blue,
     primaryColor: Colors.white,
     // ignore: deprecated_member_use
     accentColor: Colors.blue,
     disabledColor: Colors.grey,
-    cardColor: Colors.white,
+    cardColor: Colors.blue,
     canvasColor: Colors.white,
     brightness: Brightness.light,
     buttonTheme: Theme.of(context).buttonTheme.copyWith(
@@ -34,6 +39,7 @@ lightTheme(context) {
         buttonColor: Colors.blue,
         splashColor: Colors.white),
     appBarTheme: const AppBarTheme(
+      color: Colors.blue,
       elevation: 0.0,
     ),
   );

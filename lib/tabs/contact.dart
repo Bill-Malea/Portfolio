@@ -1,87 +1,180 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:portfolio/providers/projectsprovider.dart';
+import 'package:provider/provider.dart';
+import '../models/MessageModel.dart';
 
+// ignore: must_be_immutable
 class ContactTab extends StatefulWidget {
-  const ContactTab({Key? key}) : super(key: key);
+ 
+   const ContactTab({Key? key,}) : super(key: key);
 
   @override
   _ContactTabState createState() => _ContactTabState();
 }
 
 class _ContactTabState extends State<ContactTab> {
+  
+final _key = GlobalKey<FormState>();
+
+ 
+
+     
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Get In Touch',
-            style: TextStyle(fontSize: 15),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const FormInputFieldWithIcon(
-            ismessage: false,
-            labelText: 'Name',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const FormInputFieldWithIcon(
-            ismessage: false,
-            labelText: 'Email',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const FormInputFieldWithIcon(
-            ismessage: false,
-            labelText: 'Subject',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const FormInputFieldWithIcon(
-            ismessage: true,
-            labelText: 'Message',
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          ElevatedButton(
-            clipBehavior: Clip.antiAlias,
-            onPressed: () {},
-            child: const Text(
-              'Send Message',
-              style: TextStyle(
-                fontSize: 14,
+
+  var _name='';
+  var   _email='';
+  var   _subject ='';
+  var   _message ='';
+
+     
+  void  send() {
+      if (!_key.currentState!.validate()) {
+         _key.currentState!.save(); 
+      if (kDebugMode) {
+       print(_name);
+     }
+
+ Provider.of<Projectsprovider>(context,listen: false).sendmessage(message:Message(subject: _subject,
+  name: _name,
+   message: _message,
+   email: _email));
+      }
+     
+      }
+
+    return Form(
+      key: _key,
+      child: Container(
+        margin: const EdgeInsets.all(15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Get In Touch',
+              style: TextStyle(fontSize: 15),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            FormInputFieldWithIcon(
+              ismessage: false,
+              labelText: 'Name',
+               validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Text is empty';
+                }
+                return null;
+               
+              },
+                onchanged: (val) {
+                  setState(() {
+                   _name = val!;
+                    
+                  });
+                 
+                
+                }, 
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+             FormInputFieldWithIcon(
+              ismessage: false,
+              labelText: 'Email',
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Text is empty';
+                }
+                  return null;
+              },
+                onchanged: (val) {
+                  setState(() {
+                    _email = val!;
+                    
+                  });
+                 
+                }, 
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+             FormInputFieldWithIcon(
+              ismessage: false,
+              labelText: 'Subject',
+              validator:(text) {
+                if (text == null || text.isEmpty) {
+                  return 'Text is empty';
+                }
+              return null;
+              },
+                onchanged: (val) {
+                  setState(() {
+                    _subject = val!;
+                    
+                  });
+                 
+                }, 
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+             FormInputFieldWithIcon(
+              ismessage: true,
+              labelText: 'Message',
+              validator: (text) {
+                if (text == null || text.isEmpty) {
+                  return 'Text is empty';
+                }
+                
+              },
+                onchanged: (val) {
+                  
+                  setState(() {
+                   _message = val!;
+                   
+                  });
+
+               
+                }, 
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ElevatedButton(
+              clipBehavior: Clip.antiAlias,
+              onPressed:send,
+              child: const Text(
+                'Send Message',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween,
-            children: const [
-              FooterIcon(
-                icon: Icons.map,
-                location: 'Eldoret,Kenya',
-                type: 'Address',
-              ),
-              FooterIcon(
-                icon: Icons.mail,
-                location: 'Bill.malea@yahoo.com',
-                type: 'Email ',
-              ),
-              FooterIcon(
-                icon: Icons.message,
-                location: '+254727800223',
-                type: 'Lets Talk',
-              ),
-            ],
-          )
-        ],
+            Row(
+              mainAxisAlignment:
+                  MainAxisAlignment.spaceBetween,
+              children: const [
+                FooterIcon(
+                
+                  location: 'Eldoret,Kenya',
+                  type: 'Address',
+                ),
+                FooterIcon(
+                  
+                  location: 'Bill.malea@yahoo.com',
+                  type: 'Email ',
+                ),
+                FooterIcon(
+                 
+                  location: '+254727800223',
+                  type: 'Lets Talk',
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
@@ -91,13 +184,13 @@ class FooterIcon extends StatelessWidget {
   const FooterIcon({
     Key? key,
     required this.location,
-    required this.icon,
+   
     required this.type,
   }) : super(key: key);
 
   final String location;
   final String type;
-  final IconData icon;
+
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +199,7 @@ class FooterIcon extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        Icon(icon),
-        const SizedBox(
-          height: 10,
-        ),
+       
         Text(
           type,
           style: const TextStyle(fontSize: 11),
@@ -127,29 +217,28 @@ class FooterIcon extends StatelessWidget {
 }
 
 class FormInputFieldWithIcon extends StatelessWidget {
-  const FormInputFieldWithIcon({
+   FormInputFieldWithIcon({
     Key? key,
     required this.labelText,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
-    required this.ismessage,
+    required this.ismessage, required this.validator, required this.onchanged,
   }) : super(key: key);
 
   final String labelText;
   final bool ismessage;
   final TextInputType keyboardType;
   final bool obscureText;
+   final String? Function(String?) validator;
+    final void Function(String?) onchanged;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: TextFormField(
+        onFieldSubmitted:validator ,
         maxLines: ismessage ? 5 : 1,
-        onChanged: (val) {
-          // setState(() {
-          //   _transactionid = val;
-          // });
-        },
+        onChanged: onchanged,
         style: const TextStyle(
           fontSize: 12,
         ),

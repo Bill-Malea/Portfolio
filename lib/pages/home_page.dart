@@ -1,9 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/providers/api_provider.dart';
 import 'package:portfolio/tabs/about_tab.dart';
 import 'package:portfolio/widgets/theme_inherited_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../models/MessageModel.dart';
+import '../providers/projectsprovider.dart';
 import '../tabs/contact.dart';
 import '../tabs/projects_tab.dart';
 
@@ -15,47 +18,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  final _scaffold = GlobalKey<ScaffoldState>();
+final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+
+bool? isValid = _key.currentState?.validate();
+     
+     if (kDebugMode) {
+       print(isValid);
+     }
     int _selectedIndex =
         Provider.of<Navigations>(context).selectetab;
     List<Widget> tabWidgets = <Widget>[
       const AboutTab(),
       const ProjectsTab(),
-      const ContactTab(),
+       const ContactTab(),
       const AboutTab(),
     ];
 
     return Scaffold(
+      key: _scaffold ,
       body: SingleChildScrollView(
-        child: Center(
-            child: Column(
-          children: [
-            IconButton(
-              icon: ThemeSwitcher.of(context).isDarkModeOn
-                  ? const Icon(
-                      Icons.lightbulb,
-                      size: 15,
-                    )
-                  :  const Icon(
-                      Icons.lightbulb,
-                      size: 15,
-                    ),
-              onPressed: () => ThemeSwitcher.of(context)
-                  .switchDarkMode(),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const NavigationTabs(),
-            tabWidgets.elementAt(_selectedIndex),
-          ],
-        )),
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+          Row(
+            children: [
+              const Expanded(child: SizedBox()),
+              IconButton(
+                icon: ThemeSwitcher.of(context).isDarkModeOn
+                    ? Image.asset('assets/light.png')
+                    : Image.asset('assets/moon.png'),
+                onPressed: () => ThemeSwitcher.of(context)
+                    .switchDarkMode(),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const NavigationTabs(),
+          tabWidgets.elementAt(_selectedIndex),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -174,14 +183,9 @@ class _TabItemState extends State<TabItem> {
                       width: 2.0,
                       decoration: BoxDecoration(
                         color: widget.active
-                            ? Colors.pink
+                            ? Theme.of(context).cardColor
                             : Colors.transparent,
-                        // borderRadius:
-                        //     const BorderRadius.only(
-                        //   topRight: Radius.circular(10.0),
-                        //   bottomRight:
-                        //       Radius.circular(10.0),
-                        // ),
+                        
                       ),
                     ),
                   ),
