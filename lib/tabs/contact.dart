@@ -30,7 +30,7 @@ final _key = GlobalKey<FormState>();
 
      
   void  send() {
-      if (!_key.currentState!.validate()) {
+      if (_key.currentState!.validate()) {
          _key.currentState!.save(); 
       if (kDebugMode) {
        print(_name);
