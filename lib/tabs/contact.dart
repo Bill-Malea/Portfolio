@@ -29,20 +29,7 @@ final _key = GlobalKey<FormState>();
   var   _message ='';
 
      
-  void  send() {
-      if (_key.currentState!.validate()) {
-         _key.currentState!.save(); 
-      if (kDebugMode) {
-       print(_name);
-     }
-
- Provider.of<Projectsprovider>(context,listen: false).sendmessage(message:Message(subject: _subject,
-  name: _name,
-   message: _message,
-   email: _email));
-      }
-     
-      }
+    
 
     return Form(
       key: _key,
@@ -144,7 +131,21 @@ final _key = GlobalKey<FormState>();
             ),
             ElevatedButton(
               clipBehavior: Clip.antiAlias,
-              onPressed:send,
+              onPressed:() {
+      if (_key.currentState!.validate()) {
+        if (kDebugMode) {
+       print(_key.currentState!.validate());
+     }
+         _key.currentState!.save(); 
+      
+
+//  Provider.of<Projectsprovider>(context,listen: false).sendmessage(message:Message(subject: _subject,
+//   name: _name,
+//    message: _message,
+//    email: _email));
+      }
+     
+      },
               child: const Text(
                 'Send Message',
                 style: TextStyle(
@@ -235,8 +236,8 @@ class FormInputFieldWithIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: TextFormField(
-        onFieldSubmitted:validator ,
+      child: TextField(
+        
         maxLines: ismessage ? 5 : 1,
         onChanged: onchanged,
         style: const TextStyle(

@@ -19,15 +19,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _scaffold = GlobalKey<ScaffoldState>();
-final _key = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
 
-bool? isValid = _key.currentState?.validate();
-     
-     if (kDebugMode) {
-       print(isValid);
-     }
     int _selectedIndex =
         Provider.of<Navigations>(context).selectetab;
     List<Widget> tabWidgets = <Widget>[
