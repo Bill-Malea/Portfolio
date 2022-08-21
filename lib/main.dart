@@ -41,6 +41,20 @@ class MainClass extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => Projectsprovider(),
           ),
-        ], child: const HomePage()));
+       
+        ], child: FutureBuilder(
+          future:   Projectsprovider().loadprojects(),
+          builder: ((context, snapshot) {
+          if(snapshot.hasData){
+            return const HomePage(loading: false,);
+          }else if(snapshot.hasError){
+           
+          }
+
+return  const HomePage(loading: true,);
+
+
+
+        }),) ));
   }
 }

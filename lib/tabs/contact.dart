@@ -7,7 +7,7 @@ import '../models/MessageModel.dart';
 // ignore: must_be_immutable
 class ContactTab extends StatefulWidget {
  
-   const ContactTab({Key? key,}) : super(key: key);
+    const ContactTab({Key? key, }) : super(key: key);
 
   @override
   _ContactTabState createState() => _ContactTabState();
@@ -29,155 +29,152 @@ final _key = GlobalKey<FormState>();
   var   _message ='';
 
      
-    
+     final _contactscaffold = GlobalKey<ScaffoldState>();
 
     return Form(
-      key: _key,
-      child: Container(
-        margin: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Get In Touch',
-              style: TextStyle(fontSize: 15),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            FormInputFieldWithIcon(
-              ismessage: false,
-              labelText: 'Name',
-               validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Text is empty';
-                }
-                return null;
-               
-              },
-                onchanged: (val) {
-                  setState(() {
-                   _name = val!;
-                    
-                  });
-                 
-                
-                }, 
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-             FormInputFieldWithIcon(
-              ismessage: false,
-              labelText: 'Email',
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Text is empty';
-                }
+        key: _key,
+        child: Container(
+          margin: const EdgeInsets.all(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Get In Touch',
+                style: TextStyle(fontSize: 15),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              FormInputFieldWithIcon(
+                ismessage: false,
+                labelText: 'Name',
+                 validator: (text) {
+                  if (text == null || text.isEmpty) {
+                    return 'Text is empty';
+                  }
                   return null;
-              },
-                onchanged: (val) {
-                  setState(() {
-                    _email = val!;
-                    
-                  });
                  
-                }, 
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-             FormInputFieldWithIcon(
-              ismessage: false,
-              labelText: 'Subject',
-              validator:(text) {
-                if (text == null || text.isEmpty) {
-                  return 'Text is empty';
-                }
-              return null;
-              },
-                onchanged: (val) {
-                  setState(() {
-                    _subject = val!;
-                    
-                  });
-                 
-                }, 
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-             FormInputFieldWithIcon(
-              ismessage: true,
-              labelText: 'Message',
-              validator: (text) {
-                if (text == null || text.isEmpty) {
-                  return 'Text is empty';
-                }
-                
-              },
-                onchanged: (val) {
-                  
-                  setState(() {
-                   _message = val!;
+                },
+                  onchanged: (val) {
+                    setState(() {
+                     _name = val!;
+                      
+                    });
                    
-                  });
+                  
+                  }, 
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+               FormInputFieldWithIcon(
+                ismessage: false,
+                labelText: 'Email',
+                validator: (text) {
+                  if (text == null || text.isEmpty) {
+                    return 'Text is empty';
+                  }
+                    return null;
+                },
+                  onchanged: (val) {
+                    setState(() {
+                      _email = val!;
+                      
+                    });
+                   
+                  }, 
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+               FormInputFieldWithIcon(
+                ismessage: false,
+                labelText: 'Subject',
+                validator:(text) {
+                  if (text == null || text.isEmpty) {
+                    return 'Text is empty';
+                  }
+                return null;
+                },
+                  onchanged: (val) {
+                    setState(() {
+                      _subject = val!;
+                      
+                    });
+                   
+                  }, 
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+               FormInputFieldWithIcon(
+                ismessage: true,
+                labelText: 'Message',
+                validator: (text) {
+                  if (text == null || text.isEmpty) {
+                    return 'Text is empty';
+                  }
+                  
+                },
+                  onchanged: (val) {
+                    
+                    setState(() {
+                     _message = val!;
+                     
+                    });
+    
+                 
+                  }, 
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                clipBehavior: Clip.antiAlias,
+                onPressed:() {
+        if (_key.currentState!.validate()) {
+           _key.currentState!.save(); 
 
-               
-                }, 
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            ElevatedButton(
-              clipBehavior: Clip.antiAlias,
-              onPressed:() {
-      if (_key.currentState!.validate()) {
-        if (kDebugMode) {
-       print(_key.currentState!.validate());
-     }
-         _key.currentState!.save(); 
-      
-
-//  Provider.of<Projectsprovider>(context,listen: false).sendmessage(message:Message(subject: _subject,
-//   name: _name,
-//    message: _message,
-//    email: _email));
-      }
-     
-      },
-              child: const Text(
-                'Send Message',
-                style: TextStyle(
-                  fontSize: 14,
+     Provider.of<Projectsprovider>(context,listen: false).sendmessage(message:Message(subject: _subject,
+      name: _name,
+       message: _message,
+       email: _email));
+        }
+       
+        },
+                child: const Text(
+                  'Send Message',
+                  style: TextStyle(
+                    fontSize: 14,
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween,
-              children: const [
-                FooterIcon(
-                
-                  location: 'Eldoret,Kenya',
-                  type: 'Address',
-                ),
-                FooterIcon(
+              Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceBetween,
+                children: const [
+                  FooterIcon(
                   
-                  location: 'Bill.malea@yahoo.com',
-                  type: 'Email ',
-                ),
-                FooterIcon(
-                 
-                  location: '+254727800223',
-                  type: 'Lets Talk',
-                ),
-              ],
-            )
-          ],
+                    location: 'Eldoret,Kenya',
+                    type: 'Address',
+                  ),
+                  FooterIcon(
+                    
+                    location: 'Bill.malea@yahoo.com',
+                    type: 'Email ',
+                  ),
+                  FooterIcon(
+                   
+                    location: '+254727800223',
+                    type: 'Lets Talk',
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    
   }
 }
 
@@ -218,7 +215,7 @@ class FooterIcon extends StatelessWidget {
 }
 
 class FormInputFieldWithIcon extends StatelessWidget {
-   FormInputFieldWithIcon({
+   const FormInputFieldWithIcon({
     Key? key,
     required this.labelText,
     this.keyboardType = TextInputType.text,

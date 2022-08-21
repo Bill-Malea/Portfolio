@@ -4,36 +4,52 @@ import 'package:portfolio/providers/api_provider.dart';
 import 'package:portfolio/tabs/about_tab.dart';
 import 'package:portfolio/widgets/theme_inherited_widget.dart';
 import 'package:provider/provider.dart';
-
-import '../models/MessageModel.dart';
+import '../models/project_model.dart';
 import '../providers/projectsprovider.dart';
 import '../tabs/contact.dart';
 import '../tabs/projects_tab.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+ final bool loading;
+   const HomePage({Key? key,required this.loading}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final _scaffold = GlobalKey<ScaffoldState>();
+  @override
+void initState() {
+    super.initState();
+  Provider.of<Projectsprovider>(context,listen: false).loadprojects();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+     
+});}
+
   @override
   Widget build(BuildContext context) {
+     final List<Project> projects =
+        Provider.of<Projectsprovider>(context).projects;
 
     int _selectedIndex =
         Provider.of<Navigations>(context).selectetab;
     List<Widget> tabWidgets = <Widget>[
       const AboutTab(),
-      const ProjectsTab(),
+       ProjectsTab(project: projects,),
        const ContactTab(),
       const AboutTab(),
     ];
 
     return Scaffold(
-      key: _scaffold ,
-      body: SingleChildScrollView(
+    
+      body: widget.loading ? 
+Center(
+  child:   CircularProgressIndicator(color: Theme.of(context).cardTheme.color,
+  
+    strokeWidth: 1.0),
+)
+      :
+      SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.all(10),
           child: Column(
@@ -55,7 +71,7 @@ class _HomePageState extends State<HomePage> {
             height: 10,
           ),
           const NavigationTabs(),
-          tabWidgets.elementAt(_selectedIndex),
+     tabWidgets.elementAt(_selectedIndex),
             ],
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/providers/projectsprovider.dart';
 import 'package:provider/provider.dart';
@@ -10,14 +11,11 @@ class AboutTab extends StatefulWidget {
 }
 
 class _AboutTabState extends State<AboutTab> {
-  @override
-  void didChangeDependencies() {
-    Provider.of<Projectsprovider>(context).loadprojects();
-    super.didChangeDependencies();
-  }
+ 
   @override
   Widget build(BuildContext context) {
     var _links = Provider.of<Projectsprovider>(context).links;
+   
     return SingleChildScrollView(
       child: Center(
         child: Padding(
@@ -61,7 +59,9 @@ class _AboutTabState extends State<AboutTab> {
               ElevatedButton(
             clipBehavior: Clip.antiAlias,
             onPressed: () {
-              Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Cv']);
+             
+              Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links.call().cv);
+              
             },
             child: const Text(
               'Download CV',
@@ -85,7 +85,7 @@ class _AboutTabState extends State<AboutTab> {
                         height: 20,
                         child: Image.asset('assets/github.png')),
                     label: const Text('Github'), onPressed: () { 
-                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Github']);
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links.call().github);
                      },
                     
                   ),
@@ -95,7 +95,7 @@ class _AboutTabState extends State<AboutTab> {
                         height: 20,
                         child: Image.asset('assets/twitter.png')),
                     label: const Text('Twitter'), onPressed: () { 
-                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Twitter']);
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links.call().twitterlink);
                      },
                    
                   ),
@@ -111,7 +111,7 @@ class _AboutTabState extends State<AboutTab> {
                         height: 20,
                         child: Image.asset('assets/instagram.png')),
                     label: const Text('Instagram'), onPressed: () { 
-                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Instagram']);
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links.call().instalink);
                      },
                    
                   ),
@@ -121,7 +121,7 @@ class _AboutTabState extends State<AboutTab> {
                         height: 20,
                         child: Image.asset('assets/facebook.png')),
                     label: const Text('Facebook'), onPressed: () { 
-                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Facebook']);
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links.call().facebook);
                      },
                    
                   ),
@@ -131,7 +131,7 @@ class _AboutTabState extends State<AboutTab> {
                         height: 20,
                         child: Image.asset('assets/linkedin.png')),
                     label: const Text('Linkedin'), onPressed: () { 
-                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links['Linkedin']);
+                         Provider.of<Projectsprovider>(context,listen: false).urllauch(link:  _links.call().linkedin);
                      },
                    
                   )
